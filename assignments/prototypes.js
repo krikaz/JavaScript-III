@@ -18,8 +18,8 @@
 
 function GameObject(obj) {
   this.createdAt = obj.createdAt;
-  this.dimensions = obj.dimensions;
   this.name = obj.name;
+  this.dimensions = obj.dimensions;
 }
 
 GameObject.prototype.destroy = function() {
@@ -34,8 +34,9 @@ GameObject.prototype.destroy = function() {
 */
 
 function CharacterStats(obj) {
-  GameObject.call(this, obj);
   this.healthPoints = obj.healthPoints;
+  GameObject.call(this, obj);
+  
 }
 
 CharacterStats.prototype.takeDamage = function() {
@@ -55,17 +56,18 @@ CharacterStats.prototype = Object.create(GameObject.prototype);
 */
 
 function Humanoid(obj) {
-  CharacterStats.call(this, obj);
-  GameObject.call(this, obj);
   this.team = obj.team;
   this.weapons = obj.weapons;
   this.language = obj.language;
+  CharacterStats.call(this, obj);
+  GameObject.call(this, obj);
+
 }
 
 Humanoid.prototype.greet = function() {
   return `${this.name} offers a greeting in ${this.language}.`
 };
-Humanoid.prototype = Object.create(CharacterStats);
+Humanoid.prototype = Object.create(CharacterStats.prototype);
 
 /*
  * Inheritance chain: GameObject -> CharacterStats -> Humanoid
@@ -119,20 +121,20 @@ const archer = new Humanoid({
   language: "Elvish"
 });
 
-// console.log(mage.createdAt); // Today's date
-// console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
-// console.log(swordsman.healthPoints); // 15
-// console.log(mage.name); // Bruce
-// console.log(swordsman.team); // The Round Table
-// console.log(mage.weapons); // Staff of Shamalama
-// console.log(archer.language); // Elvish
-// console.log(archer.greet()); // Lilith offers a greeting in Elvish.
-// console.log(mage.takeDamage()); // Bruce took damage.
-// console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+console.log(mage.createdAt); // Today's date
+console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
+console.log(swordsman.healthPoints); // 15
+console.log(mage.name); // Bruce
+console.log(swordsman.team); // The Round Table
+console.log(mage.weapons); // Staff of Shamalama
+console.log(archer.language); // Elvish
+console.log(archer.greet()); // Lilith offers a greeting in Elvish.
+console.log(mage.takeDamage()); // Bruce took damage.
+console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
 // console.log(mage);
-console.log(mage.name);
-console.log(mage.team);
+// console.log(mage.name);
+// console.log(mage.team);
 // console.log(swordsman);
 // console.log(archer);
 
