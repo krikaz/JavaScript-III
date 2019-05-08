@@ -150,7 +150,10 @@ function Villain(obj) {
 Villain.prototype = Object.create(Humanoid.prototype);
 
 Villain.prototype.attack = function (target) {
-  target.healthPoints -= 10;
+  target.healthPoints -= 7;
+  if (target.healthPoints <= 0) {
+    target.destroy();
+  }
   return `${this.name} double strikes ${target.name} for 10 attack points.`;
 }
 
@@ -166,7 +169,10 @@ function Hero(obj) {
 Hero.prototype = Object.create(Humanoid.prototype);
 
 Hero.prototype.attack = function (target) {
-  target.healthPoints -= 10;
+  target.healthPoints -= 8;
+  if (target.healthPoints <= 0) {
+    target.destroy();
+  }
   return `${this.name} smashes ${target.name} for 10 attack points.`
 }
 
