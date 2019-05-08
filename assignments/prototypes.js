@@ -142,3 +142,67 @@ const archer = new Humanoid({
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
 // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
 // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+function Villain(obj) {
+  Humanoid.call(this, obj);
+} 
+
+Villain.prototype = Object.create(Humanoid.prototype);
+
+Villain.prototype.attack = function (target) {
+  target.healthPoints -= 10;
+  return `${this.name} double strikes ${target.name} for 10 attack points.`;
+}
+
+CharacterStats.prototype.takeDamage = function() {
+  return `${this.name} took damage.`;
+};
+
+
+function Hero(obj) {
+  Humanoid.call(this, obj);
+} 
+
+Hero.prototype = Object.create(Humanoid.prototype);
+
+Hero.prototype.attack = function (target) {
+  target.healthPoints -= 10;
+  return `${this.name} smashes ${target.name} for 10 attack points.`
+}
+
+
+const goodGuy = new Hero({
+  createdAt: new Date(),
+  dimensions: {
+    length: 2,
+    width: 2,
+    height: 6
+  },
+  healthPoints: 50,
+  name: "Good Guy",
+  team: "The ones that do good things",
+  weapons: ["Mace of light", "Shield of Healing"],
+  language: "Common Tongue"
+});
+
+const badGuy = new Villain({
+  createdAt: new Date(),
+  dimensions: {
+    length: 3,
+    width: 3,
+    height: 10
+  },
+  healthPoints: 100,
+  name: "Bad Guy",
+  team: "The ones that do bad things",
+  weapons: ["One-handed fire hammer", "One-handed poisonous axe"],
+  language: "Evilish"
+});
+
+
+// console.log(badGuy);
+// console.log(goodGuy);
+
+console.log(goodGuy.greet());
+console.log(badGuy.attack(goodGuy));
+console.log(goodGuy.attack(badGuy));
